@@ -1,7 +1,7 @@
 # The line below states we will base our new image on the Latest Official Ubuntu 
 FROM ubuntu:18.04
 
-ENV MEMORY_LIMIT "128MB"
+ENV MEMORY_LIMIT "128M"
 
 # Identify the maintainer of an image
 MAINTAINER My Name "info@juicyapphk.com"
