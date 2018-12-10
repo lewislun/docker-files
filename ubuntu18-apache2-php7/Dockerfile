@@ -36,7 +36,7 @@ RUN chmod 755 -R /var/www/
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Set php memory limit
-RUN cd /etc/php/7.2/apache2/ && touch php.ini && echo "memory_limit = "$MEMORY_LIMIT >> php.ini
+RUN sed -i -r "s/memory_limit = 128M/memory_limit = $MEMORY_LIMIT/g" /etc/php/7.2/apache2/php.ini
 
 # Mount Volumes
 VOLUME "/var/www/html/" 
