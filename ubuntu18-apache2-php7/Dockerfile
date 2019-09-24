@@ -30,10 +30,19 @@ RUN usermod -aG sudo juicyapp
 RUN chown -R juicyapp:www-data /var/www/
 RUN chmod 755 -R /var/www/
 
-# TODO:: Install MariaDB
-
 # Apache config file
-COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN echo \
+	"<VirtualHost *:80>" \
+    "	ServerAdmin webmaster@localhost" \
+    "	DocumentRoot /var/www/html" \
+	"    ErrorLog ${APACHE_LOG_DIR}/error.log" \
+	"    CustomLog ${APACHE_LOG_DIR}/access.log combined" \
+	"    <Directory /var/www/html>" \
+	"        Options Indexes FollowSymLinks MultiViews" \
+	"        AllowOverride All" \
+	"        Require all granted" \
+	"    </Directory>" \
+	"</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 
 # Set php memory limit
 RUN sed -i -r "s/memory_limit = 128M/memory_limit = $MEMORY_LIMIT/g" /etc/php/7.2/apache2/php.ini
