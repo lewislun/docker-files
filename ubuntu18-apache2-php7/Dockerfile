@@ -17,12 +17,15 @@ ENV TZ Asia/Hong_Kong
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # RUN hostnamectl set-hostname 'ubuntu18_apache2_php7'
 
-# Install vim apache2 and modules
+# Install apache2 and modules
 RUN apt install -y apache2 libapache2-mod-php7.2 && a2enmod php7.2 && a2enmod rewrite && a2enmod headers && a2enmod proxy && a2enmod ssl
 
 # Install PHP 7.2+ and modules
 RUN apt install -y software-properties-common
 RUN apt install -y php7.2 php7.2-fpm php7.2-common php7.2-mysql php7.2-curl php7.2-cli php7.2-gd php7.2-mbstring php7.2-xml php7.2-soap
+
+# Install vim and composer
+RUN apt install -y vim composer
 
 # Add user and associated to www-data group
 RUN adduser juicyapp
